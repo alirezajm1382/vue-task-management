@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import KanbanColumn from '@/components/KanbanColumn.vue'
 import TheNavigation from '../components/TheNavigation.vue'
 import useTasks from '../stores/tasks'
 

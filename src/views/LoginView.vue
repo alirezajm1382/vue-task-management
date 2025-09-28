@@ -12,8 +12,14 @@
         <legend class="fieldset-legend">Password</legend>
         <input type="password" class="input" placeholder="Enter here" v-model="form.password" />
       </fieldset>
+      <p class="text-error text-sm text-center" v-if="error">{{ error }}</p>
       <div class="justify-end card-actions pt-4">
-        <button class="btn btn-primary w-full" @click="handleLogin">Log In</button>
+        <button
+          :class="[{ 'btn btn-primary w-full': true }, { 'btn-disabled': globalStore.isLoading }]"
+          @click="handleLogin"
+        >
+          Log In
+        </button>
         <p class="text-sm text-center mt-5">
           Don't have an account?
           <span class="text-primary"
@@ -26,12 +32,15 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import useAuth from '../composables/useAuth'
 import { useRouter } from 'vue-router'
+import useGlobalStore from '@/stores/global'
 
 const auth = useAuth()
 const router = useRouter()
+const globalStore = useGlobalStore()
+const error = ref<string | null>(null)
 
 const form = reactive({
   email: '',
@@ -39,11 +48,14 @@ const form = reactive({
 })
 
 const handleLogin = async () => {
-  await auth.login(form.email, form.password).then(() => {
-    router.push({
-      name: 'Home',
+  await auth
+    .login(form.email, form.password)
+    .then(() => {
+      router.push({
+        name: 'Home',
+      })
     })
-  })
+    .catch((err) => (error.value = err))
 }
 </script>
 

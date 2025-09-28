@@ -9,6 +9,12 @@ export interface Task {
   updated_at?: string
 }
 
+export interface TaskColumn {
+  id: string
+  title: string
+  tasks: Task[]
+}
+
 export interface CreateTaskPayload {
   title: string
   status: TaskStatus

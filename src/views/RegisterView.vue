@@ -1,5 +1,7 @@
 <template>
-  <div class="card w-96 bg-base-100 card-xl border-1 border-gray-200 shadow-xl">
+  <div
+    class="card w-96 bg-base-200 card-xl border-1 border-gray-200 dark:border-gray-700 shadow-xl"
+  >
     <div class="card-body">
       <h2 class="text-2xl font-semibold text-center">Create your account</h2>
       <fieldset class="fieldset">

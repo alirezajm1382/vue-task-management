@@ -9,8 +9,9 @@
         <SunIcon :size="20" class="text-gray-600" />
         <input
           type="checkbox"
-          :checked="true"
-          class="toggle toggle-primary bg-[#cccccc] text-white border-1 checked:bg-primary"
+          :value="!store.isDarkMode"
+          v-on:change="store.toggleDarkMode"
+          class="toggle toggle-primary bg-[#cccccc] text-white checked:text-base-100 border-1 dark:border-gray-500 checked:bg-primary"
         />
         <MoonIcon :size="20" class="text-gray-600" />
       </div>
@@ -47,6 +48,8 @@
 
 <script setup lang="ts">
 import { ListCheckIcon, SunIcon, MoonIcon, LogOutIcon, SettingsIcon } from 'lucide-vue-next'
+import useNavigationStore from '../stores/navigation'
+const store = useNavigationStore()
 </script>
 
 <style scoped></style>

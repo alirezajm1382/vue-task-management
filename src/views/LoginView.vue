@@ -6,14 +6,14 @@
       <h2 class="text-2xl font-semibold text-center">Log in to your account</h2>
       <fieldset class="fieldset">
         <legend class="fieldset-legend">Email Address</legend>
-        <input type="text" class="input" placeholder="user@email.com" />
+        <input type="text" class="input" placeholder="user@email.com" v-model="form.email" />
       </fieldset>
       <fieldset class="fieldset">
         <legend class="fieldset-legend">Password</legend>
-        <input type="password" class="input" placeholder="Enter here" />
+        <input type="password" class="input" placeholder="Enter here" v-model="form.password" />
       </fieldset>
       <div class="justify-end card-actions pt-4">
-        <button class="btn btn-primary w-full">Log In</button>
+        <button class="btn btn-primary w-full" @click="handleLogin">Log In</button>
         <p class="text-sm text-center mt-5">
           Don't have an account?
           <span class="text-primary"
@@ -25,6 +25,26 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive } from 'vue'
+import useAuth from '../composables/useAuth'
+import { useRouter } from 'vue-router'
+
+const auth = useAuth()
+const router = useRouter()
+
+const form = reactive({
+  email: '',
+  password: '',
+})
+
+const handleLogin = async () => {
+  await auth.login(form.email, form.password).then(() => {
+    router.push({
+      name: 'Home',
+    })
+  })
+}
+</script>
 
 <style scoped></style>

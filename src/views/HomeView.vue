@@ -8,7 +8,15 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import TheNavigation from '../components/TheNavigation.vue'
+import useTasks from '../stores/tasks'
+
+const { list } = useTasks()
+
+onMounted(() => {
+  list()
+})
 </script>
 
 <style scoped></style>
